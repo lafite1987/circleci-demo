@@ -55,7 +55,7 @@ jobs:
           mvn clean test ${MVN_ARGS}
 
       - store_test_results:
-          path: target/surefire-reports
+          path: circleci-demo/target/surefire-reports
 
          
   deploy-sit1:
