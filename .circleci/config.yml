@@ -4,7 +4,7 @@ parameters:
     type: string
     default: "/temp/workspace"
 jobs:
-  编译:
+  build:
     docker:
       - image: circleci/openjdk:8-jdk
     working_directory: ~/circleci-demo
@@ -37,7 +37,7 @@ jobs:
           root: << parameters.temp-workspace >>
           paths:
             - ~/circleci-demo
-  测试:
+  test:
     docker:
       - image: circleci/openjdk:8-jdk
     working_directory: << parameters.temp-workspace >>
@@ -58,14 +58,14 @@ jobs:
           path: target/surefire-reports
 
          
-  发布至站点1:
+  deploy-sit1:
     docker:
       - image: circleci/openjdk:8-jdk 
     steps:
       - run: echo 'deploy sit1'
 
 
-  发布至站点2:
+  deploy-sit2:
     docker:
       - image: circleci/openjdk:8-jdk 
     steps:
@@ -76,27 +76,27 @@ workflows:
   version: 2
   circleci-demo-workflow:
     jobs:
-      - 编译:
+      - build:
 
-      - 测试:
+      - test:
           requires:
-            - 编译
+            - build
 
-      - 确认发布:
+      - approval-deploy:
           type: approval
           requires:
-            - 测试
+            - test
 
-      - 发布至站点1:
+      - deploy-sit1:
           requires:
-            - 确认发布
+            - approval-deploy
           filters:
             branches:
               only: master
 
-      - 发布至站点2:
+      - deploy-sit2:
           requires:
-            - 确认发布
+            - approval-deploy
           filters:
             branches:
               only: master
