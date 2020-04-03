@@ -51,8 +51,8 @@ jobs:
           at: << parameters.temp-workspace >>
 
       - run: | 
-          cd << parameters.temp-workspace >>
-          mvn clean test ${MVN_ARGS}
+        cd << parameters.temp-workspace >>
+        mvn clean test ${MVN_ARGS}
 
       - store_test_results:
           path: target/surefire-reports
@@ -60,29 +60,28 @@ jobs:
 
 workflows:
   version: 2
-  build-deploy:
-    jobs:
-      - 编译:
+  jobs:
+    - 编译:
 
-      - 测试:
-          requires:
-            - build
+    - 测试:
+        requires:
+          - build
 
-      - 确认发布:
-          type: approval
-          requires:
-            - 测试
+    - 确认发布:
+        type: approval
+        requires:
+          - 测试
 
-      - 发布至站点1:
-          requires:
-            - 确认发布
-          filters:
-            branches:
-              only: master
+    - 发布至站点1:
+        requires:
+          - 确认发布
+        filters:
+          branches:
+            only: master
 
-      - 发布至站点2:
-          requires:
-            - 确认发布
-          filters:
-            branches:
-              only: master
+    - 发布至站点2:
+        requires:
+          - 确认发布
+        filters:
+          branches:
+            only: master
