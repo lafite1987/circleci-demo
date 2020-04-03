@@ -51,10 +51,7 @@ jobs:
           at: ~/circleci-demo
 
       - run: | 
-          echo "===================================================================="
-          echo pwd=`pwd`
-          ls
-          echo "===================================================================="
+          cd circleci-demo
           mvn clean test ${MVN_ARGS}
 
       - store_test_results:
