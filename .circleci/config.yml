@@ -77,6 +77,9 @@ workflows:
   circleci-demo-workflow:
     jobs:
       - build:
+          filters:
+            branches:
+              only: master
 
       - test:
           requires:
