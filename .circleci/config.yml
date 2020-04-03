@@ -26,7 +26,7 @@ jobs:
 
       - save_cache:
           paths:
-            -  ~/circleci-demo/.repo
+            -  .repo
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
       - store_artifacts:
@@ -36,7 +36,7 @@ jobs:
       - persist_to_workspace:
           root: << parameters.temp-workspace >>
           paths:
-            - ~/circleci-demo
+            - << parameters.temp-workspace >>
   test:
     docker:
       - image: circleci/openjdk:8-jdk
