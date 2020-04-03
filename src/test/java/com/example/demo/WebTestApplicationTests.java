@@ -11,6 +11,7 @@ public class WebTestApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		System.out.println("this is just a test");
 	}
 
 }
