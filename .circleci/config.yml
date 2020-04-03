@@ -40,7 +40,7 @@ jobs:
   test:
     docker:
       - image: circleci/openjdk:8-jdk
-    working_directory: << parameters.temp-workspace >>
+    working_directory: ~/circleci-demo
 
     environment:
       JVM_OPTS: -Xmx3200m
@@ -48,10 +48,9 @@ jobs:
 
     steps:
       - attach_workspace:
-          at: << parameters.temp-workspace >>
+          at: ~/circleci-demo
 
       - run: | 
-          cd << parameters.temp-workspace >>
           mvn clean test ${MVN_ARGS}
 
       - store_test_results:
