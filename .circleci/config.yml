@@ -58,14 +58,14 @@ jobs:
           path: circleci-demo/target/surefire-reports
 
          
-  deploy-sit1:
+  deploy-site1:
     docker:
       - image: circleci/openjdk:8-jdk 
     steps:
       - run: echo 'deploy sit1'
 
 
-  deploy-sit2:
+  deploy-site2:
     docker:
       - image: circleci/openjdk:8-jdk 
     steps:
@@ -90,14 +90,14 @@ workflows:
           requires:
             - test
 
-      - deploy-sit1:
+      - deploy-site1:
           requires:
             - approval-deploy
           filters:
             branches:
               only: master
 
-      - deploy-sit2:
+      - deploy-site2:
           requires:
             - approval-deploy
           filters:
