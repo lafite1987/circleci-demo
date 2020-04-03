@@ -60,28 +60,29 @@ jobs:
 
 workflows:
   version: 2
-  jobs:
-    - 编译:
+  circleci-demo-workflow:
+    jobs:
+      - 编译:
 
-    - 测试:
-        requires:
-          - build
+      - 测试:
+          requires:
+            - build
 
-    - 确认发布:
-        type: approval
-        requires:
-          - 测试
+      - 确认发布:
+          type: approval
+          requires:
+            - 测试
 
-    - 发布至站点1:
-        requires:
-          - 确认发布
-        filters:
-          branches:
-            only: master
+      - 发布至站点1:
+          requires:
+            - 确认发布
+          filters:
+            branches:
+              only: master
 
-    - 发布至站点2:
-        requires:
-          - 确认发布
-        filters:
-          branches:
-            only: master
+      - 发布至站点2:
+          requires:
+            - 确认发布
+          filters:
+            branches:
+              only: master
