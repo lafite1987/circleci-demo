@@ -12,6 +12,7 @@ jobs:
     environment:
       JVM_OPTS: -Xmx3200m
       MVN_ARGS: -Dmaven.repo.local=.repo
+      temp-workspace: << parameters.temp-workspace >>
 
     steps:
       - checkout
