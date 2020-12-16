@@ -54,7 +54,6 @@ jobs:
       - run: | 
           cd circleci-demo
           mvn clean test ${MVN_ARGS}
-
       - store_test_results:
           path: circleci-demo/target/surefire-reports
 
@@ -104,4 +103,3 @@ workflows:
           filters:
             branches:
               only: master
-#test
