@@ -24,7 +24,7 @@ jobs:
             - v1-dependencies-
 
       - run: |
-          sleep 60
+          sleep 120
           mvn clean install package ${MVN_ARGS}
 
       - save_cache:
