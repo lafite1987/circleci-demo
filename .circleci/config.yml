@@ -26,6 +26,8 @@ jobs:
       - run:
           name: Test
           command: mvn test
+      - run: echo '部署开始'
+      - run: sudo apt-get update && sudo apt-get install rsync
       - deploy:
           name: deploy
           command: |
